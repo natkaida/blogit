@@ -6,6 +6,7 @@ from .models import Question, Vote
 from django.contrib import messages
 from users.utils import paginateObjects
 
+@login_required()
 def questions(request):
     profile = request.user.profile
     questions = Question.objects.all()
@@ -13,6 +14,7 @@ def questions(request):
     context = {'questions': questions, 'custom_range': custom_range, 'profile': profile}
     return render(request, 'polls/questions.html', context)
 
+@login_required()
 def question(request, question_id):
     profile = request.user.profile
     question = Question.objects.get(pk=question_id)
@@ -21,6 +23,7 @@ def question(request, question_id):
     return render(request, 
         'polls/question.html', context)
 
+@login_required()
 def results(request, question_id):
     profile = request.user.profile
     question = get_object_or_404(Question, pk=question_id)
