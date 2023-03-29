@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <div class="mt-5 mb-5">
+            <div class="vh-100 d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-12 col-md-8 col-lg-4">
+                            <div class="card card-bg">
+                                <div class="card-body p-5">
+                                    <form action="{% url 'create-interest' %}"
+                                          method="POST"
+                                          class="form-floating mb-3">
+                                        {% csrf_token %}
+                                        <div class="mb-3 mt-md-4">
+                                            <div class="text-center">
+                                                <a href="{% url 'account' %}" style="text-decoration: none;"><i class="uil uil-arrow-circle-left"
+   style="padding: 0.3rem;
+          font-size: 25px"></i>Вернуться в профиль</a>
+                                            </div>
+                                            {% for field in form %}
+                                                <div class="form-floating mb-3">
+                                                    <label for="{{ field.name }}" class="form-label">{{ field.label }}</label>
+                                                    {{ field }}
+                                                </div>
+                                            {% endfor %}
+                                            {% for error in field.errors %}<p style="color: red;">{{ error }}</p>{% endfor %}
+                                            <div class="col-12 d-grid">
+                                                <button class="btn btn-primary rounded-pill" type="submit">Сохранить</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

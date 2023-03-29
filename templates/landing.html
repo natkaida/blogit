@@ -1,0 +1,433 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="py-0">
+        <div class="bg-holder"
+             style="background-image:url(static/assets/img/illustrations/bg.png);
+                    background-position:left center;
+                    background-size:auto 816px">
+        </div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-md-7 col-xl-7 pt-9 text-md-start text-center">
+                    <h1 class="display-2 text-light fw-thin">
+                        Сообщество
+                        <br class="d-none d-xl-block" />
+                        <strong class="fw-bolder">увлеченных</strong>людей
+                    </h1>
+                    <p class="fs-2 text-400">
+                        Есть интересные идеи?
+                        <br class="d-none d-xxl-block" />
+                        Присоединяйся!
+                    </p>
+                    <a class="btn btn-primary btn-ensurance mt-5" href="{% url 'register' %}"><span class="fas fa-chevron-right fa-xs btn-icon"></span><span class="btn-text">Регистрация</span></a>
+                </div>
+                <div class="col-md-5 col-xl-5 pe-xxl-0">
+                    <div class="card card-bg hero-header-form">
+                        <div class="card-body p-4 p-xl-6">
+                            <h2 class="text-100 text-center">Вход</h2>
+                            <form action="{% url 'landingLogin' %}" method="POST" class="mb-3">
+                                {% csrf_token %}
+                                <div class="form-floating mb-3">
+                                    <input class="form-control input-box form-ensurance-header-control"
+                                           id="floatingName"
+                                           type="text"
+                                           name="username"
+                                           placeholder="name"/>
+                                    <label for="floatingName">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control input-box form-ensurance-header-control"
+                                           id="floatingPassword"
+                                           type="password"
+                                           name="password"
+                                           placeholder="••••••••"/>
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                <div class="col-12 d-grid">
+                                    <button class="btn btn-primary rounded-pill" type="submit">Войти</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="bg-holder d-none d-md-block"
+             style="background-image:url(static/assets/img/illustrations/bg-car-insurance.png);
+                    background-position:0 200px;
+                    background-size:100% 45%">
+        </div>
+        <div class="bg-holder d-none d-md-block"
+             style="background-image:url(static/assets/img/illustrations/bg-left.png);
+                    background-position:left;
+                    background-size:15% 100%">
+        </div>
+        <div class="bg-holder d-none d-xl-block  mt-11"
+             style="background-image:url(static/assets/img/illustrations/circle.png);
+                    background-position:18% 49%;
+                    background-size:auto">
+        </div>
+        <div class="container-lg">
+            <div class="row flex-center py-8 py-md-10">
+                <div class="col-12 mt-6">
+                    <div class="d-flex align-items-start">
+                        <div class="nav flex-column nav-tab"
+                             id="nav-tab"
+                             role="tablist"
+                             aria-orientation="vertical">
+                            <a class="circle-hover-wrapper nav-link mb-lg-4 active"
+                               id="nav-car-tab"
+                               href="#!"
+                               data-bs-toggle="tab"
+                               data-bs-target="#nav-car"
+                               role="tab"
+                               aria-controls="nav-car"
+                               aria-selected="true">
+                                <div class="icon-box">
+                                    <img class="car-insurance-icon"
+                                         src="static/assets/img/icons/users.png"
+                                         alt="Пользователи"/>
+                                    <img class="car-insurance-icon car-insurance-icon-hover"
+                                         src="static/assets/img/icons/users-hover.png"
+                                         alt="..."/>
+                                </div>
+                            </a><a class="circle-hover-wrapper nav-link mb-lg-4"
+   id="nav-home-tab"
+   href="#!"
+   data-bs-toggle="tab"
+   data-bs-target="#nav-home"
+   role="tab"
+   aria-controls="nav-home"
+   aria-selected="false">
+                            <div class="icon-box">
+                                <img class="car-insurance-icon"
+                                     src="static/assets/img/icons/blogs.png"
+                                     alt="..."/>
+                                <img class="car-insurance-icon car-insurance-icon-hover"
+                                     src="static/assets/img/icons/blogs-hover.png"
+                                     alt="..."/>
+                            </div>
+                        </a><a class="circle-hover-wrapper nav-link mb-lg-4"
+   id="nav-paw-tab"
+   href="#!"
+   data-bs-toggle="tab"
+   data-bs-target="#nav-paw"
+   role="tab"
+   aria-controls="nav-paw"
+   aria-selected="false">
+                        <div class="icon-box">
+                            <img class="car-insurance-icon"
+                                 src="static/assets/img/icons/polls.png"
+                                 alt="..."/>
+                            <img class="car-insurance-icon car-insurance-icon-hover"
+                                 src="static/assets/img/icons/polls-hover.png"
+                                 alt="..."/>
+                        </div>
+                    </a><a class="circle-hover-wrapper nav-link mb-lg-4"
+   id="nav-plane-tab"
+   href="#!"
+   data-bs-toggle="tab"
+   data-bs-target="#nav-plane"
+   role="tab"
+   aria-controls="nav-plane"
+   aria-selected="false">
+                    <div class="icon-box">
+                        <img class="car-insurance-icon"
+                             src="static/assets/img/icons/quizzes.png"
+                             alt="..."/>
+                        <img class="car-insurance-icon car-insurance-icon-hover"
+                             src="static/assets/img/icons/quizzes-hover.png"
+                             alt="..."/>
+                    </div>
+                </a>
+            </div>
+            <div class="tab-content w-100" id="nav-tabContent">
+                <div class="tab-pane fade show active"
+                     id="nav-car"
+                     role="tabpanel"
+                     aria-labelledby="nav-car-tab">
+                    <div class="row align-items-center offset-sm-1 g-3">
+                        <div class="col-md-6 col-xl-4 order-1 order-md-0">
+                            <h2 class="text-light mb-md-5">Пользователи</h2>
+                            <p class="text-400">Находите новых друзей, начинайте новые проекты. Поделитесь с нами своими идеями.</p>
+                            <p class="text-400 mt-3">Ставьте лайки, добавляйте посты друзей в Избранное.</p>
+                            <a class="btn btn-primary btn-ensurance mt-5" href="{% url 'profiles' %}"><span class="fas fa-chevron-right fa-xs btn-icon"></span><span class="btn-text">Пользователи</span></a>
+                        </div>
+                        <div class="col-md-6 col-xl-8 text-end">
+                            <div class="img-shape">
+                                <img class="feature-img"
+                                     src="static/assets/img/gallery/users.jpg"
+                                     alt="Пользователи"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-home"
+                     role="tabpanel"
+                     aria-labelledby="nav-home-tab">
+                    <div class="row align-items-center offset-sm-1 g-3">
+                        <div class="col-md-6 col-xl-4 order-1 order-md-0">
+                            <h2 class="text-light mb-md-5">Блоги и комментарии</h2>
+                            <p class="text-400">Каждый пользователь нашей платформы создает в среднем 2 записи в день.</p>
+                            <p class="text-400 mt-3">Пользователи пишут до 20 комментариев в секунду.</p>
+                            <a class="btn btn-primary btn-ensurance mt-5" href="{% url 'blog:friends' %}"><span class="fas fa-chevron-right fa-xs btn-icon"></span><span class="btn-text">Блоги</span></a>
+                        </div>
+                        <div class="col-md-6 col-xl-8 text-end">
+                            <div class="img-shape">
+                                <img class="feature-img"
+                                     src="static/assets/img/gallery/blogs.jpg"
+                                     alt="Блоги"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-paw"
+                     role="tabpanel"
+                     aria-labelledby="nav-paw-tab">
+                    <div class="row align-items-center offset-sm-1 g-3">
+                        <div class="col-md-6 col-xl-4 order-1 order-md-0">
+                            <h2 class="text-light mb-md-5">Опросы и голосования</h2>
+                            <p class="text-400">
+                                Участвуйте в опросах и голосованиях - нам важно мнение каждого пользователя. Выбирайте оптимальные опции из предложенных, сообщайте о новых идеях.
+                            </p>
+                            <p class="text-400 mt-3">Мы учитываем все пожелания при разработке новых функций платформы.</p>
+                            <a class="btn btn-primary btn-ensurance mt-5" href="{% url 'polls:questions' %}"><span class="fas fa-chevron-right fa-xs btn-icon"></span><span class="btn-text">Опросы</span></a>
+                        </div>
+                        <div class="col-md-6 col-xl-8 text-end">
+                            <div class="img-shape">
+                                <img class="feature-img"
+                                     src="static/assets/img/gallery/polls.jpg"
+                                     alt="Опросы"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-plane"
+                     role="tabpanel"
+                     aria-labelledby="nav-plane-tab">
+                    <div class="row align-items-center offset-sm-1 g-3">
+                        <div class="col-md-6 col-xl-4 order-1 order-md-0">
+                            <h2 class="text-light mb-md-5">
+                                Тесты
+                            </h2>
+                            <p class="text-400">
+                                У нас есть тесты на множество интересных и сложных тем.
+                            </p>
+                            <p class="text-400 mt-3">
+                                Вопросы делятся на 2 типа: с одним верным ответом, и с несколькими верными ответами.
+                            </p>
+                            <a class="btn btn-primary btn-ensurance mt-5" href="{% url 'quizzes:quizzes' %}"><span class="fas fa-chevron-right fa-xs btn-icon"></span><span class="btn-text">Тесты</span></a>
+                        </div>
+                        <div class="col-md-6 col-xl-8 text-end">
+                            <div class="img-shape">
+                                <img class="feature-img"
+                                     src="static/assets/img/gallery/quizzes.jpg"
+                                     alt="Тесты"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<div class="container">
+    <div class="row">
+        <h2 class="text-light text-center my-5">
+            Найди новых друзей
+        </h2>
+        <div class="mx-auto col-10 col-md-8 col-lg-6">
+            <form class="text-light" action="{% url 'profiles' %}" method="get">
+                <div class="input-group-icon">
+                    <input class="form-control form-ensurance-control"
+                           type="text"
+                           name="search_query"
+                           value="{{ search_query }}"
+                           id="formInput#search"
+                           placeholder="Поиск по профилям "
+                           aria-label="search"/>
+                    <button class="btn btn-primary btn-subscribe" type="submit">
+                        Найти
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="row">
+            <h3 class="text-light text-center my-5">
+                Сейчас на сайте
+            </h3>
+        </div>
+        <div class="row flex-center h-100 circle-blend circle-blend-left circle-primary">
+            <div class="col-12">
+                <div class="row align-items-center circle-blend circle-blend-right circle-warning">
+                    {% for profile in profiles %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card p-3 h-100 card-soft-primary">
+                                <div class="card-body">
+                                    <div class="d-flex flex-between-center">
+                                        <p class="fw-normal mb-0 text-400">
+                                            {{ profile.profession }}
+                                        </p>
+                                        <h6>
+                                            <span class="badge rounded-pill text-primary" style="background:#224E8F;">{{ profile.city }}</span>
+                                        </h6>
+                                    </div>
+                                    <h5 class="fw-bold fs-2 text-200 my-3 text-center">
+                                        {{ profile.name }}
+                                    </h5>
+                                    <div class="profile-image-wrapper">
+                                        <div class="profile-image">
+                                            <a href="{% url 'user-profile' profile.username %}">
+                                                    <img src="{{ profile.image.url }}" alt="profile" />
+                                                </a>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        {{ profile.summary }}
+                                    </p>
+                                    <div class="col fs-0 fw-normal mb-0 text-center text-secondary">
+                                        <a href="{% url 'user-profile' profile.username %}"><span class="btn btn-primary rounded-pill btn-md mr-btn">Профиль</span></a>
+                                        <a href="{% url 'create-message' profile.username %}"><span class="btn btn-warning rounded-pill btn-md">Сообщение</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% include 'pagination.html' with queryset=profiles custom_range=custom_range %}
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-light text-center mb-8">
+                Контакты
+            </h2>
+            <div class="col-12 col-lg-6 col-xl-7 mb-4 order-0 order-sm-0">
+                <a class="logo-footer fs-6" href="index.html"><span class="text-primary fw-bolder">Blog</span><span class="fw-bold text-300"> it!</span></a>
+                <p class="text-light mt-8">
+                    <i class="fas fa-map-marker-alt me-3"></i><span class="text-light">г. Москва, ул. Академика Королева, 12</span>
+                </p>
+                <p class="text-light">
+                    <i class="fas fa-envelope me-3 text-primary"> </i><a href="mailto:аdmin@blogit.com">аdmin@blogit.com </a>
+                </p>
+                <ul class="list-unstyled list-inline my-2">
+                    <li class="list-inline-item">
+                        <a class="text-decoration-none" href="#!"><i class="fab fa-facebook-square fa-2x social-icons"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="text-decoration-none" href="#!"><i class="fab fa-instagram fa-2x social-icons"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="text-decoration-none" href="#!"><i class="fab fa-twitter-square fa-2x social-icons"> </i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="text-decoration-none" href="#!"><i class="fab fa-linkedin fa-2x social-icons"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-5">
+                <div class="card card-bg footer-form">
+                    <div class="card-body p-4 p-xl-6">
+                        <h2 class="text-100 text-center">
+                            Напишите нам
+                        </h2>
+                        <form action="{% url 'contact' %}" method="POST" class="mb-3">
+                            {% csrf_token %}
+                            <form class="mb-3" id="contact-form">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control input-box form-ensurance-header-control"
+                                           id="floatingName"
+                                           type="text"
+                                           placeholder="name"
+                                           name="name"/>
+                                    <label for="floatingName">
+                                        Имя
+                                    </label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control input-box form-ensurance-header-control"
+                                           id="floatingEmail"
+                                           type="email"
+                                           placeholder="name@example.com"
+                                           name="email"/>
+                                    <label for="floatingEmail">
+                                        Email
+                                    </label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control input-box form-ensurance-header-control"
+                                           id="floatingCatrgory"
+                                           type="text"
+                                           placeholder="Тема"
+                                           name="subject"/>
+                                    <label for="floatingCatrgory">
+                                        Тема
+                                    </label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control input-box form-ensurance-header-control"
+                                              id="floatingTextarea"
+                                              placeholder="Напишите текст сообщения"
+                                              name="body"></textarea>
+                                    <label for="floatingTextarea">
+                                        Сообщение
+                                    </label>
+                                </div>
+                                <div class="col-12 d-grid">
+                                    <button class="btn btn-primary rounded-pill" type="submit">
+                                        Отправить
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-md-flex justify-content-between pb-1 pt-1">
+                        <div class="pb-2">
+                            <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
+                                <li>
+                                    <a class="widget-list-link fs-ms" href="#">Пользователи</a>
+                                </li>
+                                <li class="ms-4">
+                                    <a class="widget-list-link fs-ms" href="#">Блоги</a>
+                                </li>
+                                <li class="ms-4">
+                                    <a class="widget-list-link fs-ms" href="#">Опросы</a>
+                                </li>
+                                <li class="ms-4">
+                                    <a class="widget-list-link fs-ms" href="#">Тесты</a>
+                                </li>
+                                <li class="ms-4">
+                                    <a class="widget-list-link fs-ms" href="#">Условия использования</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pb-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+<div class="text-start mt-3 px-3">
+    <h5 class="text-500">Категории</h5>
+    <ul class="list-unstyled">
+        {% for category in categories %}
+            <li>
+                <a class="text-decoration-none fw-bold px-2"
+                   href="{% url 'blog:by_category' category.slug %}"><i class="fas fa-chevron-circle-right mr-icon"></i>{{ category.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="text-start mt-3 px-3">
+    <h5 class="text-500">Теги</h5>
+    <div class="col-12 container-fluid px-0">
+        {% for tag in tags %}
+            <a href="{% url 'blog:by_tag' tag.slug %}"><span class="badge rounded-pill text-400 pill-bg my-2">{{ tag.name }}</span></a>
+        {% endfor %}
+    </div>
+</div>

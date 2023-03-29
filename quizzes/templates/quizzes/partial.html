@@ -1,0 +1,20 @@
+{% if error_message %}
+    <span class="message-card bg-danger px-4 py-4 fw-bold">{{ error_message }}</span>
+{% elif is_correct %}
+    <span class="message-card bg-success px-4 py-4 fw-bold mb-3">Правильно.</span>
+    <span class="message-card bg-success px-4 py-4 fw-bold">{{ question.explanation }}</span>
+{% elif is_correct == None %}
+    <span class="message-card bg-warning px-4 py-4 fw-bold">Не выбран вариант ответа. Не забудьте ответить позже!</span>
+{% else %}
+    {% if correct_answer|length > 1 %}
+        <div class="message-card bg-danger px-4 py-4 fw-bold mb-3">
+            Неверно! Правильные ответы:
+            <ul class="list-unstyled mt-2">
+                {% for answer in correct_answer %}<li>{{ answer }}</li>{% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <span class="message-card bg-danger px-4 py-4 fw-bold  mb-3">Неверно! Правильный ответ: {{ correct_answer }}</span>
+    {% endif %}
+    <span class="message-card bg-success px-4 py-4 fw-bold">{{ question.explanation }}</span>
+{% endif %}

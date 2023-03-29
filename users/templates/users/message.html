@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main>
+            <div class="mt-5 mb-5">
+                <div class="vh-100 d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="card card-bg">
+                                    <div class="card-body p-5">
+                                        <div class="mb-1 mt-md-2">
+                                            <div>
+                                                <h2 class="text-center text-primary">
+                                                    <i class="uil uil-envelope-open"></i>
+                                                </h2>
+                                                <h5 class="fw-bold fs-2 text-200 mb-2 text-center">{{ message.subject }}</h5>
+                                                <hr>
+                                                <div class="d-flex justify-content-between">
+                                                    {% if message.sender %}
+                                                        <span class="fs--1 fw-bold text-start"><a href="{% url 'user-profile' message.sender.username  %}"
+   class="text-decoration-none text-start"><i class="uil uil-user-circle text-primary"></i> {{ message.name }}</a></span>
+                                                    {% else %}
+                                                        <span class="fw-bold fs--1 text-600 text-start">Отправитель: {{ message.name }}</span>
+                                                    {% endif %}
+                                                    <span class="fs--1 text-600 text-end"><i class="uil uil-clock"></i> {{ message.created }}</span>
+                                                </div>
+                                                <hr>
+                                                <div class="message-card card-bg">
+                                                    <div class="card-body">
+                                                        <div class=" fs--1 text-200 px-2 py-2">{{ message.body|linebreaksbr }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <a href="{% url 'inbox' %}" style="text-decoration: none;"><i class="uil uil-arrow-circle-left"
+   style="padding: 0.3rem;
+          font-size: 25px"></i>Назад к сообщениям</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        {% endblock content %}

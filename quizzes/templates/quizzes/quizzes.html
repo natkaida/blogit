@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main class="mt-5 mb-5">
+            <div class="container">
+                <div class="main-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card p-3 card-soft-primary">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="profile-image-wrapper mt-5">
+                                            <div class="profile-image">
+                                                <img src="{{ profile.image.url }}" alt="profile" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-1">
+                                            <h5 class="fw-bold fs-2 text-200 mb-5 text-center">{{ profile.name }}</h5>
+                                            <div class="text-center">
+                                                <div class="col-12 d-grid">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-primary rounded-pill my-2 col-9"
+                                                           href="{% url 'account' %}">Мой профиль</a>
+                                                        <a class="btn btn-warning rounded-pill my-2 col-9"
+                                                           href="{% url 'blog:my-blog' %}">Мой блог</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="text-center">{% include 'socials.html' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card p-3 h-100 card-soft-primary">
+                                <div class="profile-card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <h6 class="fw-bold fs-1 text-200 my-3">Тесты</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {% for quiz in quizzes %}
+                                            <div class="message-card card-soft-primary mt-4">
+                                                <div class="card-body px-4">
+                                                    <span class="text-end">{{ quiz.published }}</span>
+                                                    <h6 class="fs--1 text-400 py-3">{{ quiz.name }}</h6>
+                                                    <div class="text-center mb-3">
+                                                        <a href="{% url 'quizzes:display_quiz' quiz.id %}"
+                                                           class="btn btn-primary rounded-pill btn-sm">Пройти</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="my-4">{% include 'pagination.html' with queryset=quizzes custom_range=custom_range %}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main class="mt-5 mb-5">
+            <div class="container">
+                <div class="main-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card p-3 card-soft-primary">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="profile-image-wrapper mt-5">
+                                            <div class="profile-image">
+                                                <img src="{{ profile.image.url }}" alt="profile" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-1">
+                                            <h5 class="fw-bold fs-2 text-200 mb-5 text-center">{{ profile.name }}</h5>
+                                            <div class="text-center">
+                                                <div class="col-12 d-grid">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-primary rounded-pill my-2 col-9"
+                                                           href="{% url 'account' %}">Мой профиль</a>
+                                                        <a class="btn btn-warning rounded-pill my-2 col-9"
+                                                           href="{% url 'blog:my-blog' %}">Мой блог</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="text-center">{% include 'socials.html' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card p-3 h-100 card-soft-primary">
+                                <div class="profile-card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <a class="btn btn-danger rounded-pill btn-sm mb-3"
+                                               href="{% url 'polls:questions' %}"><i class="fa fa-arrow-circle-left"></i> К опросам</a>
+                                            <h6 class="fw-bold fs-1 text-200 my-3">{{ question.name }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="text-primary text-center">Вариант ответа</th>
+                                                    <th scope="col" class="text-primary text-center">Количество голосов</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for choice in question.choice_set.all %}
+                                                    <tr>
+                                                        <td class="text-400 fw-bold text-center">{{ choice.name }}</td>
+                                                        <td class="text-400 fw-bold text-center">{{ choice.votes }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-8 container-fluid my-5">
+                                            <canvas id="myChart"></canvas>
+                                        </div>
+                                    </div>
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                    <script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: {{ labels|safe }},
+      datasets: [{
+        label: 'Количество голосов',
+        data: {{ data|safe }},
+        borderWidth: 1
+      }]
+    },
+
+  });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main>
+            <div class="mt-5 mb-5">
+                <div class="vh-100 d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-9 col-lg-9">
+                                <div class="card card-bg">
+                                    <div class="card-body p-5">
+                                        <div class="mb-3 mt-md-4">
+                                            <div class="text-center">
+                                                <h5 class="fw-bold fs-2 text-200 mb-5 text-center">
+                                                    Новые сообщения: <span>{{ unreadCount }}</span>
+                                                </h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" class="text-primary">Статус</th>
+                                                                <th scope="col" class="text-primary">Никнейм</th>
+                                                                <th scope="col" class="text-primary">Имя отправителя</th>
+                                                                <th scope="col" class="text-primary">Тема</th>
+                                                                <th scope="col" class="text-primary">Дата</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for message in messageRequests %}
+                                                                <tr style="transform: rotate(0);">
+                                                                    {% if message.is_read == False %}
+                                                                        <th scope="row">
+                                                                            <i class="uil uil-envelope text-success" style="font-size: 15px"></i><a class="text-decoration-none stretched-link"
+   href="{% url 'message' message.id %}"></a>
+                                                                        </th>
+                                                                        <td class="text-success fw-bold">{{ message.sender }}</td>
+                                                                        <td class="text-success fw-bold">{{ message.name }}</td>
+                                                                        <td class="text-success fw-bold">{{ message.subject }}</td>
+                                                                        <td class="text-success fw-bold">{{ message.created }}</td>
+                                                                    {% else %}
+                                                                        <th scope="row">
+                                                                            <i class="uil uil-envelope-open  text-600" style="font-size: 15px"></i><a class="text-decoration-none stretched-link text-600"
+   href="{% url 'message' message.id %}"></a>
+                                                                        </th>
+                                                                        <td class="text-600 fw-bold">{{ message.sender }}</td>
+                                                                        <td class="text-600 fw-bold">{{ message.name }}</td>
+                                                                        <td class="text-600 fw-bold">{{ message.subject }}</td>
+                                                                        <td class="text-600 fw-bold">{{ message.created }}</td>
+                                                                    {% endif %}
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="text-center">
+                                                    <a href="{% url 'account' %}" style="text-decoration: none;"><i class="uil uil-arrow-circle-left"
+   style="padding: 0.3rem;
+          font-size: 25px"></i>Вернуться в профиль</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+{% endblock content %}

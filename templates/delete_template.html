@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <div class="mt-5 mb-5">
+            <div class="vh-100 d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-12 col-md-8 col-lg-6">
+                            <div class="card card-bg">
+                                <div class="card-body p-5">
+                                    <form class="form" action="" method="POST">
+                                        {% csrf_token %}
+                                        <p class="text-200 fw-bold text-center">Вы действительно хотите удалить "{{ object }}"?</p>
+                                        <div class="text-center">
+                                            <a class="btn btn-success rounded-pill my-2 mr-btn"
+                                               href="{% url 'account' %}">Отменить</a>
+                                            <input class="btn btn-danger rounded-pill my-2"
+                                                   type="submit"
+                                                   value="Удалить"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

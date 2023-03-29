@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main class="mt-5 mb-5">
+            <div class="container">
+                <div class="main-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card p-3 card-soft-primary">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="profile-image-wrapper mt-5">
+                                            <div class="profile-image">
+                                                <img src="{{ profile.image.url }}" alt="profile" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-1">
+                                            <h5 class="fw-bold fs-2 text-200 mb-5 text-center">{{ profile.name }}</h5>
+                                            <div class="text-center">
+                                                <div class="col-12 d-grid">
+                                                    {% if request.user.profile.id != profile.id %}
+                                                        <form action="{% url 'follow-unfollow' profile.username %}" method="POST">
+                                                            {% csrf_token %}
+                                                            {% if profile in user.profile.follows.all %}
+                                                                <button class="btn btn-danger rounded-pill my-2 col-12"
+                                                                        name="follow"
+                                                                        value="unfollow"
+                                                                        type="submit">
+                                                                    Удалить из друзей
+                                                                </button>
+                                                            {% else %}
+                                                                <button class="btn btn-warning rounded-pill my-2 col-12"
+                                                                        name="follow"
+                                                                        value="follow"
+                                                                        type="submit">
+                                                                    Добавить в друзья
+                                                                </button>
+                                                            {% endif %}
+                                                        </form>
+                                                        <a class="btn btn-primary rounded-pill my-2"
+                                                           href="{% url 'create-message' profile.username %}">Написать сообщение</a>
+                                                        <a class="btn btn-primary rounded-pill my-2"
+                                                           href="{% url 'blog:user-blog' profile.username %}">Блог пользователя</a>
+                                                    {% else %}
+                                                        <div class="col-12 d-grid">
+                                                            <a class="btn btn-danger rounded-pill my-2"
+                                                               href="{% url 'edit-account' %}">Редактировать профиль</a>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="text-center">{% include 'socials.html' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card p-3 h-100 card-soft-primary">
+                                <div class="profile-card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <h6 class="fw-bold fs-1 text-200 my-3">Профиль пользователя</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="fw-bold fs-0 mb-0 text-600">Город</h6>
+                                        </div>
+                                        <div class="col-sm-9 fs-0 fw-normal mb-0 text-600">
+                                            <p>{{ profile.city }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="fw-bold fs-0 mb-0 text-600">Профессия</h6>
+                                        </div>
+                                        <div class="col-sm-9 fs-0 fw-normal mb-0 text-600">
+                                            <p>{{ profile.profession }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="fw-bold fs-0 mb-0 text-600">О себе</h6>
+                                        </div>
+                                        <div class="col-sm-9 fs-0 fw-normal mb-0 text-600">
+                                            <p>{{ profile.about }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="fw-bold fs-1 text-200 my-3">Интересы</h6>
+                                        </div>
+                                        <div class="col-sm-9 fs-1 fw-normal mb-0 text-600"></div>
+                                    </div>
+                                    {% for interest in profile.interest_set.all %}
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <h6 class="fw-bold fs-0 mb-0 text-600">
+                                                    <a class="text-decoration-none"
+                                                       href="{% url 'interest' interest.slug %}">{{ interest.name }}</a>
+                                                </h6>
+                                            </div>
+                                            <div class="col-6 fs-0 fw-normal mb-0 text-600">
+                                                <p>{{ interest.description }}</p>
+                                            </div>
+                                            <div class="col fs-0 fw-normal mb-0 text-600 text-secondary"></div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="fw-bold fs-1 text-200 my-3">Друзья</h6>
+                                        </div>
+                                        <div class="col-sm-9 fs-1 fw-normal mb-0 text-600"></div>
+                                    </div>
+                                    <div class="row row-cols-1 row-cols-md-3 g-4">{% include 'users/friends.html' %}</div>
+                                    <div class="my-4">{% include 'pagination.html' with queryset=profiles custom_range=custom_range %}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+{% endblock content %}

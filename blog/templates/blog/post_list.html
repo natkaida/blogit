@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main class="mt-5 mb-5">
+            <div class="container">
+                <div class="main-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card p-3 card-soft-primary">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="profile-image-wrapper mt-5">
+                                            <div class="profile-image">
+                                                <img src="{{ profile.image.url }}" alt="profile" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-1">
+                                            <h5 class="fw-bold fs-2 text-200 mb-5 text-center">{{ profile.name }}</h5>
+                                            <div class="text-center">
+                                                <div class="col-12 d-grid">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-primary rounded-pill my-2 col-9"
+                                                           href="{% url 'blog:my-blog' %}">Мой блог</a>
+                                                        <a class="btn btn-primary rounded-pill my-2 col-9"
+                                                           href="{% url 'blog:friends' %}">Друзья</a>
+                                                        <a class="btn btn-warning rounded-pill my-2 col-9"
+                                                           href="{% url 'blog:user_bookmarks' %}">Избранное</a>
+                                                    </div>
+                                                    {% include 'tags_categories.html' %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="text-center">{% include 'socials.html' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card p-3 h-100 card-soft-primary">
+                                <div class="profile-card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            {% if 'friends' in request.path %}
+                                                <h6 class="fw-bold fs-1 text-200 my-3">Записи друзей</h6>
+                                                <div class="row">
+                                                    <div class="mx-auto col-10 col-md-12 col-lg-12 mb-3">
+                                                        <form class="text-light" action="{% url 'blog:friends' %}" method="get">
+                                                            <div class="input-group-icon">
+                                                                <input class="form-control form-ensurance-control"
+                                                                       type="text"
+                                                                       name="search_query"
+                                                                       value="{{ search_query }}"
+                                                                       id="formInput#search"
+                                                                       placeholder="Поиск по записям друзей"
+                                                                       aria-label="search"/>
+                                                                <button class="btn btn-primary btn-subscribe" type="submit">Найти</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                {% elif 'bookmarks' in request.path %}
+                                                    <h6 class="fw-bold fs-1 text-200 my-3">Избранное</h6>
+                                                {% elif 'category' in request.path %}
+                                                    <h6 class="fw-bold fs-1 text-200 my-3">
+                                                        Все записи в категории <span class="fw-bolder text-400">{{ category.name }}</span>
+                                                    </h6>
+                                                {% elif 'tag' in request.path %}
+                                                    <h6 class="fw-bold fs-1 text-200 my-3">
+                                                        Все записи, отмеченные тегом <span class="fw-bolder text-400">{{ tag.name }}</span>
+                                                    </h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {% for post in posts %}
+                                                <div class="message-card mb-3">
+                                                    <div class="card-header fs--1 fw-bold">
+                                                        <div class="d-flex justify-content-between">
+                                                            <a class="text-decoration-none mt-2" href=""><span class="text-start">{{ post.category }}</span></a>
+                                                            {% if request.user.profile.id == post.owner.id %}
+                                                                <span class="text-end icon-group"><a class="icon-item" href="{% url 'blog:update-post' post.id %}"><i class="uil uil-edit fs--1"></i></a><a class="icon-item" href="{% url 'blog:delete-post' post.id %}"><i class="uil uil-times-circle fs--1"></i></a></span>
+                                                            {% else %}
+                                                                <span class="text-end mt-2">{{ post.published }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body px-4">
+                                                        <h5 class="card-title text-400 p-2">{{ post.title }}</h5>
+                                                        <div class="row g-0">
+                                                            <div class="col-md-3 caption center-block">
+                                                                <div class="blog-image-wrapper mt-2">
+                                                                    <div class="blog-image">
+                                                                        <img src="{{ post.owner.image.url }}" alt="profile" />
+                                                                    </div>
+                                                                </div>
+                                                                <p class="text-200 fw-bold mt-3">
+                                                                    <a class="text-decoration-none"
+                                                                       href="{% url 'user-profile' post.owner.username %}">{{ post.owner.name }}</a>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <p class="card-text text-400 p-2">{{ post.text|safe|truncatewords:"50" }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <a class="btn btn-primary rounded-pill btn-md my-2"
+                                                               href="{% url 'blog:post' post.slug %}">Читать</a>
+                                                        </div>
+                                                    </div>
+                                                    {% include 'blog/post_footer.html' %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="my-4">{% include 'pagination.html' with queryset=posts custom_range=custom_range %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+    {% endblock content %}

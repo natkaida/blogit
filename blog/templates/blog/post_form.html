@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main>
+            <div class="mt-5 mb-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-8 col-lg-8">
+                                <div class="card card-bg">
+                                    <div class="card-body p-5">
+                                        <form action="" method="POST" class="form-floating mb-3">
+                                            {% csrf_token %}
+                                            <div class="mb-3 mt-md-4">
+                                                <h2 class="text-center text-primary">
+                                                    <i class="uil uil-edit"></i>
+                                                </h2>
+                                                <div class="text-center">
+                                                    <a href="{% url 'blog:my-blog' %}" style="text-decoration: none;"><i class="uil uil-arrow-circle-left"
+   style="padding: 0.3rem;
+          font-size: 25px"></i>Вернуться в блог</a>
+                                                </div>
+                                                <div class="form-floating mb-1">
+                                                    <label for="title" class="label">{{ form.title.label }}</label>
+                                                    {{ form.title }}
+                                                </div>
+                                                <div class="form-floating mb-1">
+                                                    <label for="slug" class="label">{{ form.slug.label }}</label>
+                                                    {{ form.slug }}
+                                                </div>
+                                                <div class="form-floating mb-1">
+                                                    <label for="category" class="label">Выберите категорию</label>
+                                                    <select name="category"
+                                                            class="form-control  form-ensurance-header-control form-select pt-5">
+                                                        {% for value, name in form.category.field.choices %}
+                                                            <option value="{{ value }}" class="">
+                                                                {{ name }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <div class="form-floating mb-1">
+                                                        <label for="tags" class="label">{{ form.tags.label }}</label>
+                                                        {% for checkbox in form.tags %}
+                                                            <div class="form-check form-check-inline mt-5">
+                                                                <label for="id_tags_{{ forloop.counter }}">
+                                                                    <input type="checkbox"
+                                                                           name="tags"
+                                                                           value="{{ forloop.counter }}"
+                                                                           class="form-check-input"
+                                                                           id="id_tags_choice{{ forloop.counter }}"
+                                                                           value="{{ choice.id }}"/>
+                                                                    {{ checkbox.choice_label }}
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="form-floating mb-1">
+                                                        <label for="text" class="label">{{ form.text.label }}</label>
+                                                        {{ form.text }}
+                                                    </div>
+                                                    <div class="mb-3 text-center">
+                                                        <label for="newtags" class="label">Добавьте (через запятую) собственные теги, если их нет в списке</label>
+                                                        <input class="form-control input-box"
+                                                               type="text"
+                                                               placeholder="Дополнительные теги"
+                                                               name="newtags"/>
+                                                        <label for="newtags"></label>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <button class="btn btn-primary rounded-pill" type="submit">Сохранить</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        {% endblock content %}

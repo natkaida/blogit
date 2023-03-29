@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style></style>
+    <section>
+        <div class="mt-5 mb-5">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-12 col-md-8 col-lg-6">
+                            <div class="card card-bg">
+                                <div class="card-body p-5">
+                                    <form class="form"
+                                          method="POST"
+                                          action="{% url 'edit-account' %}"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="mb-3 mt-md-4">
+                                            <div class="text-center">
+                                                <a class="navbar-brand" href="{% url 'profiles' %}"><span class="text-primary fs-3 ms-2 fw-bolder">Blog</span><span class="fw-bold text-300 fs-3">it!</span></a>
+                                            </div>
+                                            <p class="mb-5 text-center">Добро пожаловать на сайт</p>
+                                            {% for field in form %}
+                                                <div class="form-floating mb-3">
+                                                    <label for="{{ field.name }}" class="form-label">{{ field.label }}</label>
+                                                    {{ field }}
+                                                </div>
+                                            {% endfor %}
+                                            {% for error in field.errors %}<p style="color: red;">{{ error }}</p>{% endfor %}
+                                            <div class="col-12 d-grid">
+                                                <button class="btn btn-primary rounded-pill mt-3" type="submit">Сохранить изменения</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

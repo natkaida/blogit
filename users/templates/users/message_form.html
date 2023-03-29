@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main>
+            <div class="mt-5 mb-5">
+                <div class="vh-100 d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-8 col-lg-4">
+                                <div class="card card-bg">
+                                    <div class="card-body p-5">
+                                        <form action="" method="POST" class="form-floating mb-3">
+                                            {% csrf_token %}
+                                            <div class="mb-3 mt-md-4">
+                                                <div class="text-center">
+                                                    <a href="{% url 'user-profile' recipient.username  %}"
+                                                       style="text-decoration: none"><i class="fa fa-arrow-circle-left mr-icon"></i>Вернуться в профиль</a>
+                                                </div>
+                                                {% if request.user.is_authenticated == False %}
+                                                    <div class="form-floating mb-3">
+                                                        <label for="name" class="form-label">{{ form.name.label }}</label>
+                                                        {{ form.name }}
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <label for="email" class="form-label">{{ form.email.label }}</label>
+                                                        {{ form.email }}
+                                                    </div>
+                                                {% endif %}
+                                                <div class="form-floating mb-3">
+                                                    <label for="subject" class="form-label">{{ form.subject.label }}</label>
+                                                    {{ form.subject }}
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <label for="body" class="form-label">{{ form.body.label }}</label>
+                                                    {{ form.body }}
+                                                </div>
+                                                <div class="col-12 d-grid">
+                                                    <button class="btn btn-primary rounded-pill" type="submit">Отправить</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    {% endblock content %}

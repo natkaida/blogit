@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <div class="container mt-5">
+            <div class="row">
+                <h2 class="text-light text-center my-5">Поиск по профилям</h2>
+                <div class="mx-auto col-10 col-md-8 col-lg-6">
+                    <form class="text-light" action="{% url 'profiles' %}" method="get">
+                        <div class="input-group-icon">
+                            <input class="form-control form-ensurance-control"
+                                   type="text"
+                                   name="search_query"
+                                   value="{{ search_query }}"
+                                   id="formInput#search"
+                                   placeholder="Поиск по именам, интересам и тексту 'Обо мне'"
+                                   aria-label="search"/>
+                            <button class="btn btn-primary btn-subscribe" type="submit">Найти</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row flex-center vh-100 circle-blend circle-blend-left circle-primary">
+                <div class="col-12">
+                    <div class="row align-items-center circle-blend circle-blend-right circle-warning">
+                        {% for profile in profiles %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card p-3 h-100 card-soft-primary">
+                                    <div class="card-body px-3">
+                                        <div class="d-flex flex-between-center">
+                                            <p class="fw-normal mb-0 text-400">{{ profile.profession }}</p>
+                                            <h6>
+                                                <span class="badge rounded-pill text-primary" style="background:#224E8F;">{{ profile.city }}</span>
+                                            </h6>
+                                        </div>
+                                        <h5 class="fw-bold fs-2 text-200 my-3 text-center">{{ profile.name }}</h5>
+                                        <div class="profile-image-wrapper">
+                                            <div class="profile-image">
+                                                <a href="{% url 'user-profile' profile.username %}">
+                                                    <img src="{{ profile.image.url }}" alt="profile" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p>{{ profile.summary }}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <form action="{% url 'follow-unfollow' profile.username %}" method="POST">
+                                                {% csrf_token %}
+                                                {% if profile in user.profile.follows.all %}
+                                                    <span class="text-start">
+                                                        <button class="btn btn-danger rounded-pill btn-md"
+                                                                name="follow"
+                                                                value="unfollow"
+                                                                type="submit">Отписаться</button>
+                                                    {% else %}
+                                                        <button class="btn btn-warning rounded-pill btn-md"
+                                                                name="follow"
+                                                                value="follow"
+                                                                type="submit">Подписаться</button>
+                                                    {% endif %}
+                                                </span>
+                                            </form>
+                                            <span class="text-end">
+                                                <a class="btn btn-primary rounded-pill btn-md"
+                                                   href="{% url 'create-message' profile.username %}">Сообщение</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% include 'pagination.html' with queryset=profiles custom_range=custom_range %}
+        </div>
+    </section>
+{% endblock content %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if page == 'register' %}
+        <section>
+            <div class="mt-6 mb-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-8 col-lg-4">
+                                <div class="card card-bg">
+                                    <div class="card-body p-5">
+                                        <form action="{% url 'register' %}"
+                                              method="POST"
+                                              class="form-floating mb-3">
+                                            {% csrf_token %}
+                                            <div class="mb-3 mt-md-4">
+                                                <div class="text-center">
+                                                    <a class="navbar-brand" href="{% url 'profiles' %}"><span class="text-primary fs-3 ms-2 fw-bolder">Blog</span><span class="fw-bold text-300 fs-3">it!</span></a>
+                                                </div>
+                                                <p class="mb-5 text-center">Добро пожаловать на сайт</p>
+                                                {% for field in form %}
+                                                    <div class="form-floating mb-3">
+                                                        <label for="{{ field.name }}" class="form-label">{{ field.label }}</label>
+                                                        {{ field }}
+                                                    </div>
+                                                {% endfor %}
+                                                {% for error in field.errors %}<p style="color: red;">{{ error }}</p>{% endfor %}
+                                                <div class="col-12 d-grid">
+                                                    <button class="btn btn-primary rounded-pill" type="submit">Создать аккаунт</button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="mb-0  text-center">
+                                                    Есть аккаунт? <a href="{% url 'login' %}" class="text-primary fw-bold">Войдите на сайт</a>
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% else %}
+    <section>
+        <div class="mt-6 mb-5">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-12 col-md-8 col-lg-4">
+                            <div class="card card-bg">
+                                <div class="card-body p-5">
+                                    <form action="{% url 'login' %}" method="POST" class="form-floating mb-3">
+                                        {% csrf_token %}
+                                        <div class="mb-3 mt-md-4">
+                                            <div class="text-center">
+                                                <a class="navbar-brand" href="{% url 'profiles' %}"><span class="text-primary fs-3 ms-2 fw-bolder">Blog</span><span class="fw-bold text-300 fs-3">it!</span></a>
+                                            </div>
+                                            <p class="mb-5 text-center">Добро пожаловать на сайт</p>
+                                            <div class="form-floating mb-3">
+                                                <label for="username" class="form-label">Логин</label>
+                                                <input type="name"
+                                                       class="form-control input-box form-ensurance-header-control"
+                                                       type="text"
+                                                       name="username"
+                                                       placeholder="username">
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <label for="password" class="form-label ">Пароль</label>
+                                                <input type="password"
+                                                       class="form-control input-box form-ensurance-header-control"
+                                                       type="text"
+                                                       name="password"
+                                                       placeholder="*******">
+                                            </div>
+                                            <div class="col-12 d-grid">
+                                                <button class="btn btn-primary rounded-pill" type="submit">Войти</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0  text-center">
+                                                Нет аккаунта? <a href="{% url 'register' %}" class="text-primary fw-bold">Зарегистрируйтесь</a>
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock content %}

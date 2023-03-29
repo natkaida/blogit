@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main class="mt-5 mb-5">
+            <div class="container">
+                <div class="main-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card p-3 card-soft-primary">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="profile-image-wrapper mt-5">
+                                            <div class="profile-image">
+                                                <img src="{{ profile.image.url }}" alt="profile" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-1">
+                                            <h5 class="fw-bold fs-2 text-200 mb-5 text-center">{{ profile.name }}</h5>
+                                            <div class="text-center">
+                                                <div class="col-12 d-grid">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-primary rounded-pill my-2 col-9"
+                                                           href="{% url 'account' %}">Мой профиль</a>
+                                                        <a class="btn btn-warning rounded-pill my-2 col-9"
+                                                           href="{% url 'blog:my-blog' %}">Мой блог</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="text-center">{% include 'socials.html' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card p-3 h-100 card-soft-primary">
+                                <div class="profile-card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <a class="btn btn-danger rounded-pill btn-sm mb-3"
+                                               href="{% url 'quizzes:quizzes' %}"><i class="fa fa-arrow-circle-left"></i> К тестам</a>
+                                            <h6 class="fw-bold fs-1 text-200 my-3">{{ question.name }}</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-200 fs--1">Результаты пользователя {{ request.user.username }}</h5>
+                                        <h5 class="text-400">{{ quiz }}</h5>
+                                        <div class="table-responsive mt-5">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="text-primary text-center">Показатели</th>
+                                                        <th scope="col" class="text-primary text-center">Результаты</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-200 fw-bold text-center">Всего вопросов в тесте</td>
+                                                        <td class="text-200 fw-bold text-center">{{ number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-200 fw-bold text-center">Правильные ответы</td>
+                                                        <td class="text-200 fw-bold text-center">{{ correct }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-200 fw-bold text-center">Неправильные ответы</td>
+                                                        <td class="text-200 fw-bold text-center">{{ wrong }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-200 fw-bold text-center">Пропущено вопросов</td>
+                                                        <td class="text-200 fw-bold text-center">{{ skipped }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+{% endblock %}

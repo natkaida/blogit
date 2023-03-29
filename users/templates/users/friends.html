@@ -1,0 +1,41 @@
+{% for profile in profiles %}
+    <div class="col">
+        <div class="card p-3 card-soft-primary align-items-center">
+            <div class="card-body text-center">
+                <h6 class="fw-bold fs--1 mb-3 text-400">{{ profile.name }}</h6>
+                <h6>
+                    <span class="badge rounded-pill text-primary mb-3 pill-bg">{{ profile.city }}</span>
+                </h6>
+                <div class="profile-image-wrapper">
+                    <div class="profile-image">
+                        <a href="{% url 'user-profile' profile.username %}">
+                            <img src="{{ profile.image.url }}" alt="profile" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 d-grid">
+                    <div class="text-center">
+                        <form action="{% url 'follow-unfollow' profile.username %}" method="POST">
+                            {% csrf_token %}
+                            {% if profile in user.profile.follows.all %}
+                                <button class="btn btn-danger rounded-pill my-2 col-12 p-2"
+                                        name="follow"
+                                        value="unfollow"
+                                        type="submit">
+                                    Отписаться
+                                </button>
+                            {% else %}
+                                <button class="btn btn-warning rounded-pill my-2 col-12 p-2"
+                                        name="follow"
+                                        value="follow"
+                                        type="submit">
+                                    Подписаться
+                                </button>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,61 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+     data-navbar-on-scroll="data-navbar-on-scroll">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'profiles' %}"><span class="text-primary fs-3 ms-2 fw-bolder">Blog</span><span class="fw-bold text-300 fs-3">it!</span></a>
+        <button class="navbar-toggler collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse pt-4 pt-lg-0"
+             id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto border-bottom border-lg-bottom-0 pt-2 pt-lg-0">
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item px-2">
+                        <a class="nav-link active"
+                           aria-current="page"
+                           href="{% url 'landing' %}">Главная</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item px-2">
+                    <a class="nav-link" aria-current="page" href="{% url 'profiles' %}">Пользователи</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'blog:friends' %}">Друзья</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'blog:my-blog' %}">Блог</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'polls:questions' %}">Опросы</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'quizzes:quizzes' %}">Тесты</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{% url 'inbox' %}">Сообщения</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{% url 'account' %}">Аккаунт</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{% url 'login' %}">Вход / Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="d-flex mt-2 align-items-center mt-lg-0">
+                <div class="dropdown"></div>
+            </div>
+        </div>
+    </div>
+</nav>

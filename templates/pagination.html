@@ -1,0 +1,31 @@
+{% if queryset.has_other_pages %}
+    <div class="text-center">
+        <ul class="list-unstyled list-inline my-2">
+            {% if queryset.has_previous %}
+                <li class="list-inline-item">
+                    <a href="?page={{ queryset.previous_page_number }}"
+                       class="btn page-link"
+                       data-page="{{ queryset.previous_page_number }}">&#10094; Предыдущая</a>
+                </li>
+            {% endif %}
+            {% for page in custom_range %}
+                {% if page == queryset.number %}
+                    <li class="list-inline-item">
+                        <a href="?page={{ page }}" class="btn page-link" data-page="{{ page }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="list-inline-item">
+                        <a href="?page={{ page }}" class="btn page-link" data-page="{{ page }}">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if queryset.has_next %}
+                <li class="list-inline-item">
+                    <a href="?page={{ queryset.next_page_number }}"
+                       class="btn page-link"
+                       data-page="{{ queryset.next_page_number }}">Следующая &#10095;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
