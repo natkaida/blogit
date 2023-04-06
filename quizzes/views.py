@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from .models import Quiz, Question, Answer, Choice, Result
 
-
 @login_required
 def quizzes(request):
     profile = request.user.profile
@@ -98,7 +97,7 @@ def grade_question(request, quiz_id, question_id):
             {'is_correct': is_correct, 
             'correct_answer': correct_answer, 
             'question': question})
-    
+
 @login_required
 def quiz_results(request, quiz_id):
     profile = request.user.profile
@@ -116,5 +115,7 @@ def quiz_results(request, quiz_id):
     'skipped': len(questions) - (correct + wrong)}
     return render(request, 
         'quizzes/results.html', context)
+
+
 
 
