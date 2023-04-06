@@ -214,15 +214,20 @@ def createInterest(request):
         form = InterestForm(request.POST)
         if form.is_valid():
             interest = form.save(commit=False)
-            interest_slug = request.POST.get('slug')
-            interest_description = request.POST.get('description')
-            profile.interest_set.get_or_create(name=interest, slug=interest_slug, description=interest_description, profile=profile)
-            messages.success(request, 'Интерес добавлен')
-            return redirect('account')
+            interest.slug = request.POST.get('slug')
+            interest.description = request.POST.get('description')
+            interest.profile = profile
+            try:
+                interest.save()
+                messages.success(request, 'Интерес добавлен')
+                return redirect('account')
+            except IntegrityError:
+                form.add_error('name', 'У вас уже есть интерес с таким именем и слагом')
 
     context = {'form': form}
-    return render(request, 
-        'users/interest_form.html', context)
+    return render(request, 'users/interest_form.html', context)
+
+
 
 
 @login_required

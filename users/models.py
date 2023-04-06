@@ -60,6 +60,7 @@ class Interest(models.Model):
         ordering = ['created']
         verbose_name = 'Интерес'
         verbose_name_plural = 'Интересы'
+        unique_together = ('name', 'slug', 'profile')
 
     def __str__(self):
         return self.name

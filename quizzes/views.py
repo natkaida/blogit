@@ -47,41 +47,32 @@ def display_question(request, quiz_id, question_id):
 def grade_question(request, quiz_id, question_id):
     question = get_object_or_404(Question, pk=question_id)
     quiz = get_object_or_404(Quiz, pk=quiz_id)
+    can_answer = question.user_can_answer(request.user)
     try:
+        if not can_answer:
+            return render(request, 
+                'quizzes/partial.html',  
+                {'question': question,
+                'error_message': 'Вы уже отвечали на этот вопрос.'})
 
         if question.qtype == 'single':
             correct_answer = question.get_answers()
             user_answer = question.answer_set.get(pk=request.POST['answer'])
-            if not question.user_can_answer(request.user):
-                return render(request, 
-                    'quizzes/partial.html',  
-                    {'question': question,
-                    'error_message': 'Вы уже отвечали на этот вопрос.'})
-            if user_answer:
-                choice = Choice(user=request.user, 
-                    question=question, answer=user_answer)
-                choice.save()
-                is_correct = correct_answer == user_answer
-                if is_correct is True:
-                    result, created = Result.objects.get_or_create(user=request.user, 
-                        quiz=quiz)
-                    result.correct = F('correct') + 1
-                    result.save()
-                else:
-                    result, created = Result.objects.get_or_create(user=request.user, 
-                        quiz=quiz)
-                    result.wrong = F('wrong') + 1
-                    result.save()
-                    
+            choice = Choice(user=request.user, 
+                question=question, answer=user_answer)
+            choice.save()
+            is_correct = correct_answer == user_answer
+            result, created = Result.objects.get_or_create(user=request.user, 
+                quiz=quiz)
+            if is_correct is True:
+                result.correct = F('correct') + 1
+            else:
+                result.wrong = F('wrong') + 1
+            result.save()
 
         elif question.qtype == 'multiple':
             correct_answer = question.get_answers()
             answers_ids = request.POST.getlist('answer')
-            if not question.user_can_answer(request.user):
-                return render(request, 
-                    'quizzes/partial.html',  
-                    {'question': question,
-                    'error_message': 'Вы уже отвечали на этот вопрос.'})
             user_answers = []
             if answers_ids:
                 for answer_id in answers_ids:
@@ -91,18 +82,14 @@ def grade_question(request, quiz_id, question_id):
                         question=question, answer=user_answer)
                     choice.save()
                 is_correct = correct_answer == user_answers 
+                result, created = Result.objects.get_or_create(user=request.user, 
+                    quiz=quiz)
                 if is_correct is True:
-                    result, created = Result.objects.get_or_create(user=request.user, 
-                        quiz=quiz)
-                    
                     result.correct = F('correct') + 1
-                    result.save()
                 else:
-                    result, created = Result.objects.get_or_create(user=request.user, 
-                        quiz=quiz)
-                    
                     result.wrong = F('wrong') + 1
-                    result.save()
+                result.save()
+
     except:
         return render(request, 'quizzes/partial.html', 
             {'question': question})
@@ -111,6 +98,7 @@ def grade_question(request, quiz_id, question_id):
             {'is_correct': is_correct, 
             'correct_answer': correct_answer, 
             'question': question})
+    
 @login_required
 def quiz_results(request, quiz_id):
     profile = request.user.profile
