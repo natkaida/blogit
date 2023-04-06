@@ -57,11 +57,10 @@ class InterestForm(ModelForm):
     class Meta:
         model = Interest
         fields = '__all__'
-        exclude = ['profile']
+        exclude = ['profile', 'slug']
 
         labels = {
             'name': 'Название',
-            'slug': 'Слаг', 
             'description':'Описание',
           
         }

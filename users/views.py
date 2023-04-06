@@ -214,7 +214,6 @@ def createInterest(request):
         form = InterestForm(request.POST)
         if form.is_valid():
             interest = form.save(commit=False)
-            interest.slug = request.POST.get('slug')
             interest.description = request.POST.get('description')
             interest.profile = profile
             try:
@@ -226,8 +225,6 @@ def createInterest(request):
 
     context = {'form': form}
     return render(request, 'users/interest_form.html', context)
-
-
 
 
 @login_required

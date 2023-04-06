@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from pytils.translit import slugify
 
 
 
@@ -55,6 +56,11 @@ class Interest(models.Model):
     profile = models.ForeignKey(
         Profile, null=True, blank=True, 
         on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value)
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['created']
