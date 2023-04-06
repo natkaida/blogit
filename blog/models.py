@@ -45,6 +45,28 @@ class Post(models.Model):
     bookmarks = models.ManyToManyField(User, 
         related_name='bookmarks', blank=True)
 
+    def get_unique_slug(self):
+        slug = slugify(self.title)
+        unique_slug = slug
+        num = 1
+        while Post.objects.filter(slug=unique_slug).exists():
+            unique_slug = f"{slug}{num}"
+            num += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.get_unique_slug()
+        super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-published']
+        verbose_name = 'Запись'
+        verbose_name_plural = 'Записи'
+
+    def __str__(self):
+        return f'{self.owner} {self.title}'
+
     def number_of_likes(self):
         if self.likes.count() == 0:
             return ''
@@ -63,16 +85,6 @@ class Post(models.Model):
         else:
             return self.comments.filter(approved=True).count()
 
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['-published']
-        verbose_name = 'Запись'
-        verbose_name_plural = 'Записи'
-
-    def __str__(self):
-        return f'{self.owner} {self.title}'
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, 

@@ -27,6 +27,7 @@ def createPost(request):
                 tag, created = Tag.objects.get_or_create(name=tag)
                 post.tags.add(tag)
             
+            return redirect("blog:my-blog")
 
     context = {'form': form}
     return render(request, "blog/post_form.html", context)
