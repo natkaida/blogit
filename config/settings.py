@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'verysecretkey'
+SECRET_KEY = 'django-insecure-^%5ow3@l)89my&qul#oh5u-z=a@%smu%g67*(=*&126urj%a)*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,6 +72,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -80,6 +83,8 @@ DATABASES = {
 }
 
 
+# Password validation
+# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -96,6 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Internationalization
+# https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'ru-Ru'
 
@@ -116,12 +124,12 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-RECIPIENT_ADDRESS = 'yourlogin@gmail.com'
+RECIPIENT_ADDRESS = 'benny.and.sebastian@gmail.com'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'yourlogin@yandex.ru'
-EMAIL_HOST_USER = 'yourlogin@yandex.ru'
-EMAIL_HOST_PASSWORD = 'yourappassword'
+DEFAULT_FROM_EMAIL = 'kaidanatalia@yandex.ru'
+EMAIL_HOST_USER = 'kaidanatalia@yandex.ru'
+EMAIL_HOST_PASSWORD = 'djbymeqfqublptjp'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
