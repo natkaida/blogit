@@ -14,11 +14,7 @@ MESSAGE_TAGS = {
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^%5ow3@l)89my&qul#oh5u-z=a@%smu%g67*(=*&126urj%a)*'
+SECRET_KEY = 'verysecretkey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -117,19 +113,18 @@ LOGIN_URL = reverse_lazy('login')
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATIC_ROOT = os.path(BASE_DIR, 'static/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-RECIPIENT_ADDRESS = 'benny.and.sebastian@gmail.com'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+RECIPIENT_ADDRESS = 'youremail@gmail.com'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'kaidanatalia@yandex.ru'
-EMAIL_HOST_USER = 'kaidanatalia@yandex.ru'
-EMAIL_HOST_PASSWORD = 'djbymeqfqublptjp'
+DEFAULT_FROM_EMAIL = 'youremail@yandex.ru'
+EMAIL_HOST_USER = 'youremail@yandex.ru'
+EMAIL_HOST_PASSWORD = 'yourappcode'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
