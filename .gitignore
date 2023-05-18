@@ -65,3 +65,4 @@ cache/
 
 # DB
 *.db
+*.sqlite3
