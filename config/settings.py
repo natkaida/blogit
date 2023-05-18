@@ -113,7 +113,7 @@ LOGIN_URL = reverse_lazy('login')
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 
