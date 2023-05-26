@@ -38,7 +38,6 @@ def userBlog(request, username):
     posts = profile.post_set.all()
     tags, categories = get_tags_categories(posts)
     custom_range, posts = paginateObjects(request, posts, 3)
-    
     context = {'profile': profile, 'posts': posts,
                 'tags': tags, 'categories': categories,
                'custom_range': custom_range}

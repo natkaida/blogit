@@ -46,37 +46,6 @@ def landingLogin(request):
                 'Неверное имя пользователя или пароль')
     return redirect('landing')
 
-def contact(request):
-
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        subject = request.POST['subject']
-        body = request.POST['body']
-   
-        msg = f'Пользователь {name} с email {email} сообщает:\n'
-        msg += f'\n{subject}\n\n'
-        msg += f'{body}'
-        try: 
-            if name and email and subject and body != '':
-                send_mail(
-                    subject=subject,
-                    message=msg,
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.RECIPIENT_ADDRESS]
-                )
-                messages.success(request, 
-                    'Сообщение отправлено! Мы скоро ответим.')
-               
-            else:
-                messages.error(request, 
-                    'Заполните, пожалуйста, все поля контактной формы.')
-        except:
-            messages.error(request, 
-                'Сервер посчитал сообщение спамом. Попробуйте позже.')
-
-    return redirect('landing')
-
 
 def profiles(request):
     profiles, search_query = searchProfiles(request)

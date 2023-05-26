@@ -13,3 +13,4 @@ admin.site.register(Answer)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
 admin.site.register(Result)
+
