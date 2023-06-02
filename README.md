@@ -5,7 +5,7 @@
 - **polls** - проведение опросов и голосований. Визуализация результатов с Chart.js.
 - **quizzes** - проведение тестов. Вопросы с одним и с несколькими верными вариантами ответа.
 
-Установка:
+## Установка:
 - Создайте виртуальное окружение ```python -m venv blogit\venv``` и перейдите в директорию blogit ```cd blogit```.
 - Активируйте окружение ```venv\scripts\activate```.
 - Установите зависимости ```pip install -r requirements.txt```
@@ -27,3 +27,15 @@ manage.py migrate --run-syncdb
 python3 manage.py migrate auth
 python3 manage.py migrate --run-syncdb
 ```
+
+## Запуск:
+На Windows выполните:
+```
+manage.py runserver
+
+```
+На Ubuntu:
+
+```
+python3 manage.py runserver
+``
