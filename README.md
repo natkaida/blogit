@@ -14,3 +14,16 @@
 manage.py migrate
 manage.py createsuperuser
 ```
+
+### В случае появления ошибки ```OperationalError: no such table: users_profile```:
+На Windows выполните:
+```
+manage.py migrate auth
+manage.py migrate --run-syncdb
+```
+На Ubuntu:
+
+```
+python3 manage.py migrate auth
+python3 manage.py migrate --run-syncdb
+```
