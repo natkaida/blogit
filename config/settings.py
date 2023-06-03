@@ -113,18 +113,10 @@ LOGIN_URL = reverse_lazy('login')
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-RECIPIENT_ADDRESS = 'youremail@gmail.com'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'youremail@yandex.ru'
-EMAIL_HOST_USER = 'youremail@yandex.ru'
-EMAIL_HOST_PASSWORD = 'yourappcode'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
